@@ -1,5 +1,6 @@
 package Zmeika;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Snake {
@@ -9,8 +10,7 @@ public class Snake {
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = rand.nextInt(100) + 1;
         }
-        for (int i = 0; i < numbers.length; i++) {
-            System.out.print(numbers[i] + " ");
-        }
+        System.out.println(Arrays.toString(numbers));
+
     }
 }
