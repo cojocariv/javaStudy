@@ -11,6 +11,9 @@ public class Snake {
             numbers[i] = rand.nextInt(100) + 1;
         }
         System.out.println(Arrays.toString(numbers));
+        for (int h : numbers) {
+            System.out.println(h);
+        }
 
     }
 }
