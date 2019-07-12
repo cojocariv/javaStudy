@@ -1,25 +1,44 @@
 package testhgjd;
 
 
-import com.sun.org.apache.xpath.internal.operations.String;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Solution {
+    private String country;
+    private String city;
+
+    public Solution(String country, String city) {
+        this.country = country;
+        this.city = city;
+    }
+
+    /*т.к. модификатор иннер класса private, то чтобы вызвать метод getDescription из другого внешнего класса,
+    нужно обернуть его вызов в какой-то public метод*/
+    public String getUserDescription(String name) {
+        return getTrickyUser(name).getDescription();
+    }
+
+    public SuperUser getTrickyUser(String name) {
+        return new SuperUser(name);
+    }
+
+    private class SuperUser {
+        private String name;
+
+        //доступ к этому методу возможен только внутри класса Solution, т.к. модификатор иннер класса private
+        public SuperUser(String name) {
+            this.name = name;
+        }
+
+        //доступ к этому методу возможен только внутри класса Solution, т.к. модификатор иннер класса private
+        public String getDescription() {
+            return String.format("My name is %s.", this.name);
+        }
+    }
+
     public static void main(String[] args) {
-        List emails = new ArrayList();
-        emails.add("user@domain.com");
-        emails.add("user@domain.co.in");
-        emails.add("user.name@domain.com");
-        emails.add("user?name@domain.co.in");
-        emails.add("user'name@domain.co.in");
-
-//Invalid emails
-        emails.add("@yahoo.com");
-
-
+        Solution solution = new Solution("the United States", "Seattle");
+        //внутри класса Solution (а сейчас мы внутри) к методу getDescription можно обращаться обоими способами
+        System.out.println(solution.getTrickyUser("George").getDescription());
+        //а из любого другого внешнего класса только так:
+        System.out.println(solution.getUserDescription("George"));
     }
 }

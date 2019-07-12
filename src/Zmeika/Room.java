@@ -1,5 +1,6 @@
 package Zmeika;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class Room {
@@ -51,6 +52,51 @@ public class Room {
     }
 
     void print() {
+        int[][] matrix = new int[height][width];
+        int headX = snake.getSections().get(0).getX();
+        int headY = snake.getSections().get(0).getY();
+        int mouseX = mouse.getX();
+        int mouseY = mouse.getY();
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+
+                if (i == (headY) && j == (headX)) { //HEAD
+                    matrix[i][j] = 2;
+                }
+
+                for (int k = 1; k < snake.getSections().size(); k++) {
+                    int elemX = snake.getSections().get(k).getX();
+                    int elemY = snake.getSections().get(k).getY();
+
+                    if (i == (elemY) && j == (elemX)) { //ELEM
+                        matrix[i][j] = 1;
+                    }
+                }
+
+                if (i == (mouseY) && j == (mouseX)) { //MOUSE
+                    matrix[i][j] = 3;
+                }
+
+            }
+
+        }
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (matrix[i][j] == 1) {
+                    System.out.print('x');
+                } else if (matrix[i][j] == 2) {
+                    System.out.print('X');
+                } else if (matrix[i][j] == 3) {
+                    System.out.print('^');
+                } else {
+                    System.out.print(".");
+                }
+            }
+            System.out.println();
+        }
+
 
     }
 
