@@ -1,7 +1,83 @@
 package Zmeika;
 
-public class Room {
-    public static void main(String[] args) {
+import java.util.regex.Matcher;
 
+public class Room {
+    private int width, height;
+    private Snake snake;
+    private Mouse mouse;
+    public static Room game;
+
+    public Room(int width, int height, Snake snake) {
+        this.width = width;
+        this.height = height;
+        this.snake = snake;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Snake getSnake() {
+        return snake;
+    }
+
+    public void setSnake(Snake snake) {
+        this.snake = snake;
+    }
+
+    public Mouse getMouse() {
+        return mouse;
+    }
+
+    public void setMouse(Mouse mouse) {
+        this.mouse = mouse;
+    }
+
+    void run() {
+
+    }
+
+    void print() {
+
+    }
+
+    public void createMouse() {
+        int x = (int) (Math.random() * width);
+        int y = (int) (Math.random() * height);
+
+        mouse = new Mouse(x, y);
+    }
+
+    public void eatMouse() {
+        createMouse();
+    }
+
+    public void sleep() throws InterruptedException {
+        if (snake.getSections().size() > 15) {
+            Thread.sleep(200);
+        } else {
+            Thread.sleep(520 - (20 * snake.getSections().size()));
+        }
+    }
+
+    public static void main(String[] args) {
+        Snake snake = new Snake(2, 3);
+        game = new Room(3, 4, snake);
+        snake.setDirection(SnakeDirection.DOWN);
+        game.createMouse();
+        game.run();
     }
 }

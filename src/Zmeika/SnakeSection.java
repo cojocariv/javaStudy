@@ -1,9 +1,9 @@
 package Zmeika;
 
-public class Mouse {
+public class SnakeSection {
     private int x, y;
 
-    public Mouse(int x, int y) {
+    public SnakeSection(int x, int y) {
         this.x = x;
         this.y = y;
     }
