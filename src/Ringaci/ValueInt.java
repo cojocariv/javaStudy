@@ -16,7 +16,7 @@ public class ValueInt {
         x = value;
     }
     public ValueInt(){
-        name = "Anonimous";
+        name = "com/javarush/task/task23/task2309";
         x = 0;
     }
     public ValueInt addValue(int val){

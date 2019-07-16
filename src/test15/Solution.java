@@ -3,16 +3,22 @@ package test15;
 import java.io.*;
 import java.net.URL;
 
+class Animal{
+    public void eat(){
+        System.out.println("Animal is eating...");
+    }
+}
+
 public class Solution {
     public static void main(String[] args) throws IOException {
-        URL oracle = new URL("https://www.oracle.com/index.html");
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(oracle.openStream()));
+Animal animal = new Animal();
+animal.eat();
 
-        String inputLine;
-        while ((inputLine = in.readLine()) != null)
-            System.out.println(inputLine);
-        in.close();
-
+Animal animal2 = new Animal(){
+    public void eat(){
+        System.out.println("Animal is eating, anonimous class...");
+    }
+};
+animal2.eat();
     }
 }

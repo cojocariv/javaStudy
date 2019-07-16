@@ -2,26 +2,50 @@ package testhgjd;
 
 
 public class Solution {
-    private static String name;
+    public final String name;
+    public final String food;
+    public final String sound;
 
-    Solution(String name) {
+
+    public Solution(String name, String food, String sound) {
         this.name = name;
+        this.food = food;
+        this.sound = sound;
     }
 
-    private static String getName() {
-        return name;
+    public void eat() {
+        System.out.println(name + ": Mmmmm, " + food);
     }
 
-    private void sout() {
-        new Solution("The Darkside Hacker") {
-            void printName() {
-                System.out.println(getName());
+    public void play() {
+        System.out.println(name + ": " + sound + " " + sound);
+    }
+
+    public void sleep(long milliseconds) {
+        System.out.println(name + ": Zzzzzzz..." + (milliseconds / 1000) + " s");
+    }
+
+    public void live() throws InterruptedException {
+        Thread thread = new Thread() {
+            public void run() {
+                try {
+                    someActions();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }.printName();
+
+            private void someActions() throws InterruptedException {
+                eat();
+                play();
+                Solution.this.sleep(1000);
+            }
+        };
+        thread.start();
+        thread.join();
     }
 
-    public static void main(String[] args) {
-        new Solution("Риша").sout();
+    public static void main(String[] args) throws InterruptedException {
+        new Solution("Amigo", "beef", "knock").live();
     }
 }
-
