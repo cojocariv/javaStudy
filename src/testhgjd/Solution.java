@@ -1,51 +1,30 @@
 package testhgjd;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.TreeSet;
+
 public class Solution {
-    public final String name;
-    public final String food;
-    public final String sound;
+    String s1;
 
-
-    public Solution(String name, String food, String sound) {
-        this.name = name;
-        this.food = food;
-        this.sound = sound;
+    static class Solution2 {
+        String s2;
     }
 
-    public void eat() {
-        System.out.println(name + ": Mmmmm, " + food);
+    class Solution3 {
+         private String s3;
+
+        public String getS3() {
+            return s3;
+        }
     }
 
-    public void play() {
-        System.out.println(name + ": " + sound + " " + sound);
-    }
+    public void main(String[] args) {
+        Solution solution = new Solution();
+    Solution.Solution3 solution3 = solution.new Solution3();
+solution3.getS3();
 
-    public void sleep(long milliseconds) {
-        System.out.println(name + ": Zzzzzzz..." + (milliseconds / 1000) + " s");
-    }
-
-    public void live() throws InterruptedException {
-        Thread thread = new Thread() {
-            public void run() {
-                try {
-                    someActions();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            private void someActions() throws InterruptedException {
-                eat();
-                play();
-                Solution.this.sleep(1000);
-            }
-        };
-        thread.start();
-        thread.join();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        new Solution("Amigo", "beef", "knock").live();
     }
 }
