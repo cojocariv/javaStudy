@@ -1,30 +1,19 @@
 package testhgjd;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeSet;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.rmi.Remote;
+import java.util.*;
 
 public class Solution {
-    String s1;
+    public static Map<String, String> map = new HashMap<>();
 
-    static class Solution2 {
-        String s2;
-    }
-
-    class Solution3 {
-         private String s3;
-
-        public String getS3() {
-            return s3;
+    public static void main(String[] args) {
+        map.put("vasile", "cojocari");
+        map.put("ion", "cojocari");
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.printf("the key is: %s, the value is: %s", entry.getKey(), entry.getValue());
         }
-    }
-
-    public void main(String[] args) {
-        Solution solution = new Solution();
-    Solution.Solution3 solution3 = solution.new Solution3();
-solution3.getS3();
-
     }
 }
