@@ -4,15 +4,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Student extends Human {
+public class Student extends UniversityPerson {
     private double averageGrade;
-    private String university;
     private Date beginningOfSession;
     private Date endOfSession;
+    private int course;
+
+    public int getCourse() {
+        return course;
+    }
+
+    public void setCourse(int course) {
+        this.course = course;
+    }
+
+    public void setAverageGrade(double averageGrade) {
+        this.averageGrade = averageGrade;
+    }
+
 
     public Student(String name, int age, double averageGrade) {
-        super(false);
-
+        super(name, age);
         this.name = name;
         this.age = age;
         this.averageGrade = averageGrade;
@@ -25,18 +37,6 @@ public class Student extends Human {
     public void learn() {
     }
 
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public void printData() {
-        System.out.println("Студент: " + name);
-    }
-
     public void incAverageGradeBy01() {
         averageGrade += 0.1;
     }
@@ -45,15 +45,9 @@ public class Student extends Human {
         averageGrade += 0.2;
     }
 
-    public void setValue(String name, double value) {
-        if (name.equals("averageGrade")) {
-            averageGrade = value;
-            return;
-        }
-        if (name.equals("course")) {
-            course = (int) value;
-            return;
-        }
+    @Override
+    public String getPosition() {
+        return "Студент";
     }
 
     public void setBeginningOfSession(int day, int month, int year) {

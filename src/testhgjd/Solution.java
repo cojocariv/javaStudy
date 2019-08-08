@@ -1,18 +1,17 @@
 package testhgjd;
 
 import java.io.*;
+import java.nio.file.FileSystemException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 
 public class Solution {
     public static void main(String[] args) {
-double x = Double.parseDouble(args[0]);
-double y = Double.parseDouble(args[1]);
-for (Operation o: Operation.values()){
-    System.out.printf("%f %s %f = %f%n", x, o, y, o.apply(x,y));
-}
 
+        long count = IntStream.of(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5).filter(w -> w > 0).count();
+        System.out.println(count);
 
     }
 }

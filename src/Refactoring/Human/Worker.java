@@ -1,23 +1,28 @@
 package Refactoring.Human;
 
-public class Worker {
-    private Human human;
+public class Worker extends Human {
     private double salary;
     public String company;
+    private Soldier soldier;
+
 
     public Worker(String name, int age) {
-        human = new Human(false);
+        super(name, age);
     }
 
     public void live() {
-        human.live();
+        soldier.live();
     }
 
     public double getSalary() {
         return salary;
     }
 
-    public void setSlr(double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public Soldier getSoldier() {
+        return soldier;
     }
 }
