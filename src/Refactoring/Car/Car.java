@@ -2,7 +2,7 @@ package Refactoring.Car;
 
 import java.util.Date;
 
-public class Car {
+public abstract class Car {
     static public final int TRUCK = 0;
     static public final int SEDAN = 1;
     static public final int CABRIOLET = 2;
@@ -18,35 +18,27 @@ public class Car {
     private boolean driverAvailable;
     private int numberOfPassengers;
 
-    public Car(int type, int numberOfPassengers) {
+    protected Car(int type, int numberOfPassengers) {
         this.type = type;
         this.numberOfPassengers = numberOfPassengers;
     }
 
-    public int fill(double numberOfLiters) {
+    public void fill(double numberOfLiters) {
         if (numberOfLiters < 0)
-            return -1;
+            throw new RuntimeException();
         fuel += numberOfLiters;
-        return 0;
     }
 
     public double getTripConsumption(Date date, int length, Date SummerStart, Date SummerEnd) {
-        double consumption;
-        if (date.before(SummerStart) || date.after(SummerEnd)) {
-            consumption = length * winterFuelConsumption + winterWarmingUp;
-        } else {
-            consumption = length * summerFuelConsumption;
-        }
-        return consumption;
+        return (isSummer(date, SummerStart, SummerEnd)) ? getSummerConsumption(length) : getWinterConsumption(length);
     }
 
     public int getNumberOfPassengersCanBeTransferred() {
-        if (!isDriverAvailable())
+        if (canPassengersBeTransferred()) {
+            return numberOfPassengers;
+        } else {
             return 0;
-        if (fuel <= 0)
-            return 0;
-
-        return numberOfPassengers;
+        }
     }
 
     public boolean isDriverAvailable() {
@@ -60,10 +52,8 @@ public class Car {
     public void startMoving() {
         if (numberOfPassengers > 0) {
             fastenPassengersBelts();
-            fastenDriverBelt();
-        } else {
-            fastenDriverBelt();
         }
+        fastenDriverBelt();
     }
 
     public void fastenPassengersBelts() {
@@ -72,11 +62,38 @@ public class Car {
     public void fastenDriverBelt() {
     }
 
-    public int getMaxSpeed() {
-        if (type == TRUCK)
-            return 80;
-        if (type == SEDAN)
-            return 120;
-        return 90;
+    public abstract int getMaxSpeed();
+
+    public static Car create(int type, int numberOfPassengers) {
+        Car instance;
+        if (type == TRUCK) {
+            instance = new Truck(numberOfPassengers);
+        } else if (type == CABRIOLET) {
+            instance = new Cabriolet(numberOfPassengers);
+        } else {
+            instance = new Sedan(numberOfPassengers);
+        }
+        return instance;
+    }
+
+    public boolean isSummer(Date date, Date summerStart, Date summerEnd) {
+        if (date.before(summerStart) || date.after(summerEnd)) return false;
+        return true;
+    }
+
+    public double getWinterConsumption(int length) {
+        return length * winterFuelConsumption + winterWarmingUp;
+    }
+
+    public double getSummerConsumption(int length) {
+        return length * summerFuelConsumption;
+    }
+
+    private boolean canPassengersBeTransferred() {
+        if (isDriverAvailable() && fuel > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -1,18 +1,26 @@
 package testhgjd;
 
-import java.io.*;
-import java.nio.file.FileSystemException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
-
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Solution {
-    public static void main(String[] args) {
 
-        long count = IntStream.of(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5).filter(w -> w > 0).count();
-        System.out.println(count);
+    public static void main(String[] args) throws Exception {
+
+        BlockingQueue queue = new ArrayBlockingQueue(32);
+
+        Producer producer = new Producer(queue);
+        Consumer consumer = new Consumer(queue);
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executorService.submit(producer);
+        executorService.submit(consumer);
+
+        Thread.sleep(2000);
+
+        executorService.shutdownNow();
 
     }
 }
-

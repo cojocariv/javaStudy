@@ -53,7 +53,7 @@ public class University {
         return Collections.max(students, Comparator.comparingDouble(Student::getAverageGrade));
     }
 
-    Student getStudentWithMinAverageGrade(){
+    public Student getStudentWithMinAverageGrade() {
         double minGrade = students.get(0).getAverageGrade();
         for (Student student : students) {
             double currentGrade = student.getAverageGrade();
@@ -64,7 +64,7 @@ public class University {
         return getStudentWithAverageGrade(minGrade);
     }
 
-    void expel(Student student){
+    public void expel(Student student) {
         students.remove(student);
     }
 }
