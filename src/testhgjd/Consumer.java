@@ -1,8 +1,14 @@
 package testhgjd;
 
+import java.io.IOException;
+import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
 public class Consumer implements Runnable{
+
+
+
+
     private BlockingQueue queue;
 
     public Consumer(BlockingQueue queue) {

@@ -1,0 +1,7 @@
+create table Books (bookId MEDIUMINT NOT NULL AUTO_INCREMENT, name VARCHAR(30) NOT NULL, price DOUBLE, PRIMARY KEY (bookId));
+insert into Books (name, price) values ('Inferno', 45.0);
+insert into Books (name, price) values ('Harry Potter', 67.5);
+insert into Books (name, price) values ('It', 23.0);
+insert into Books (name, price) values ('Spartak', 55.2);
+insert into Books (name, price) values ('Green Mile', 20.5);
+insert into Books (name, price) values ('Solomon Key', 5.0);
